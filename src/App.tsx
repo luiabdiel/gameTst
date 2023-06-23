@@ -1,7 +1,11 @@
+import { Header, Home } from "./components";
+import "./styles/global.scss";
+
 export function App() {
   return (
-    <div>
-      hi, react!
-    </div>
-  )
+   <>
+    <Header />
+    <Home />
+   </>
+  );
 }
