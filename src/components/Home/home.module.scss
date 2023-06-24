@@ -1,0 +1,12 @@
+.container {
+  width: 59.8125rem;
+
+  margin: 0 auto;
+
+  .container-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13.9375rem, 1fr));
+    column-gap: 9rem;
+    row-gap: 4.0625rem;
+  }
+}

@@ -1,4 +1,4 @@
-import axios, { AxiosPromise } from "axios";
+import axios, { AxiosError, AxiosPromise } from "axios";
 import { GameData } from "../interface/GameData";
 import { useQuery } from "@tanstack/react-query";
 
@@ -9,18 +9,25 @@ const headers = {
 }
 
 const fetchData = async (): AxiosPromise<GameData[]> => {
-  const response = axios.get(API_URL, { headers });
-  return response;
+  try {
+    const response = axios.get(API_URL, { headers, timeout: 5000 });
+    return response;
+  } catch (error: any) {
+    return error;
+  }
 }
 
 export function useGameData() {
   const query = useQuery({
     queryFn: fetchData,
-    queryKey: ["snack-data"]
+    queryKey: ["snack-data"],
+    retry: false,
+    refetchOnWindowFocus: false
   });
 
   return {
     ...query,
-    data: query.data?.data
+    data: query.data?.data,
+    error: query.error
   }
 }
