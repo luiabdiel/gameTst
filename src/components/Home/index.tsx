@@ -9,8 +9,7 @@ export function Home() {
   const errorCodes = [500, 502, 503, 504, 507, 508, 509];
 
   return (
-    <div className={S["container"]}>
-      <div className={S["container-grid"]}>
+    <section className={S["container"]}>
         {isLoading && <p>Carregando...</p>}
         {error && error.response && errorCodes.includes(error.response.status) ? (
           <p>O servidor falhou em responder, tente recarregar a página</p>
@@ -28,16 +27,17 @@ export function Home() {
         {error && error.message === "timeout of 5000ms exceeded" ? (
           <p>O servidor demorou para responder, tente mais tarde</p>
         ): <></>}
-        {!error && data &&
-          gameList?.map((gameData) => (
-            <Cards
-              key={gameData.id}
-              thumbnail={gameData.thumbnail}
-              title={gameData.title}
-              genre={gameData.genre}
-            />
-          ))}
-      </div>
-    </div>
+        <div className={S["container-grid"]}>
+          {!error && data &&
+            gameList?.map((gameData) => (
+              <Cards
+                key={gameData.id}
+                thumbnail={gameData.thumbnail}
+                title={gameData.title}
+                genre={gameData.genre}
+              />
+            ))}
+        </div>
+    </section>
   );
 }
