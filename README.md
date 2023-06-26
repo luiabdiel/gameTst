@@ -5,6 +5,9 @@ O App Masters Games é uma aplicação web interativa que oferece aos usuários 
 ![App Masters Games](./src/assets/fullpage.png)
 ![App Masters Games Genre](./src/assets/genre.png)
 
+## Visualizar em produção
+* __https://celadon-faloodeh-6a5611.netlify.app__
+
 ## Funcionalidades
 
 1. Listar jogos: Os usuários podem visualizar uma lista de jogos disponíveis.
