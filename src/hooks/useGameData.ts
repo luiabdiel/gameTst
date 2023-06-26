@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosPromise } from "axios";
+import axios, { AxiosPromise } from "axios";
 import { GameData } from "../interface/GameData";
 import { useQuery } from "@tanstack/react-query";
 
