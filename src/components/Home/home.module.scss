@@ -26,3 +26,10 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 50px 100px;
 }
+
+@media screen and (max-width: 413px){
+  .filter-container {
+    flex-direction: column-reverse;
+    gap: 0.50rem;
+  }
+}
