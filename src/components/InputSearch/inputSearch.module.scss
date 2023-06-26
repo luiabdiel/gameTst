@@ -1,0 +1,25 @@
+.search {
+  border-radius: 0.25rem;
+  padding: 0.30rem 1.20rem;
+  border: 2px solid #2455db;
+
+  display: flex;
+  align-items: center;
+
+  input {
+    outline: none;
+    border: none;
+
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+
+  button {
+    border: none;
+    outline: none;
+    padding: 0.19rem;
+    background-color: transparent;
+
+    cursor: pointer;
+  }
+}
