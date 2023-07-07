@@ -9,27 +9,18 @@
   padding: 1rem;
 }
 
-.filter-container {
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .container-grid {
   width: 100%;
 
-  padding-top: 2rem;
+  padding-top: 1rem;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 50px 100px;
 }
 
-@media screen and (max-width: 413px){
-  .filter-container {
-    flex-direction: column-reverse;
-    gap: 0.50rem;
+@media screen and (max-width: 531px){
+  .container {
+    padding: 1rem 3.25rem;
   }
 }

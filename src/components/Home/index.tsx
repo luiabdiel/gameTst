@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { useGameData } from "../../hooks/useGameData";
-import { Cards, SelectCategory } from "..";
-import S from "./home.module.scss";
+import { useFavorite, useInputSearch } from "../../hooks";
 import { GameData } from "../../interface/GameData";
-import { InputSearch } from "../InputSearch";
+import { Cards, ErrorMessage, Loading, SelectCategory } from "..";
+import S from "./index.module.scss";
 
 export function Home() {
-  const [filteredByCategory, setFilteredByCategory] = useState("");
-  const [inputFilter, setInputFilter] = useState("");
+  const { inputFilter } = useInputSearch();
+  const { favorites, onFavorites } = useFavorite();
+
   const [onInputFilter, setOnInputFilter] = useState(false);
   const [onCategoryFilter, setOnCategoryFilter] = useState(false);
+  const [filteredByCategory, setFilteredByCategory] = useState("");
   const [filteredGamesByCategories, setFilteredGamesByCategories] = useState<
     GameData[]
   >([
@@ -32,7 +34,6 @@ export function Home() {
   ]);
 
   const { data, error, isLoading } = useGameData();
-
   const gameList = data?.slice(0, 27);
   const errorCodes = [500, 502, 503, 504, 507, 508, 509];
 
@@ -62,21 +63,20 @@ export function Home() {
         setFilteredGamesByInputSearch(filtereds);
       }
     } else {
-      console.log('apagou')
       setOnInputFilter(false);
     }
   }, [filteredByCategory, inputFilter]);
 
   return (
     <section className={S["container"]}>
-      {isLoading && <p>Carregando...</p>}
+      {isLoading && <Loading />}
 
       {error &&
       // @ts-ignore
       error.response &&
       // @ts-ignore
       errorCodes.includes(error.response.status) ? (
-        <p>O servidor falhou em responder, tente recarregar a página</p>
+        <ErrorMessage text="O servidor falhou em responder, tente recarregar a página" />
       ) : (
         <></>
       )}
@@ -85,30 +85,27 @@ export function Home() {
       error.response &&
       // @ts-ignore
       errorCodes.indexOf(error.response.status) === -1 ? (
-        <p>
-          O servidor não conseguirá responder por agora, tente voltar novamente
-          mais tarde
-        </p>
+        <ErrorMessage
+          text="O servidor não conseguirá responder por agora, tente voltar novamente
+        mais tarde"
+        />
       ) : (
         <></>
       )}
       {
         // @ts-ignore
         error && error.message === "timeout of 5000ms exceeded" ? (
-          <p>O servidor demorou para responder, tente mais tarde</p>
+          <ErrorMessage text="O servidor demorou para responder, tente mais tarde" />
         ) : (
           <></>
         )
       }
       {!error && data ? (
-        <div className={S["filter-container"]}>
-          <SelectCategory
-            gameData={data}
-            setFilteredByCategory={setFilteredByCategory}
-            filteredByCategory={filteredByCategory}
-          />
-          <InputSearch setInputFilter={setInputFilter} />
-        </div>
+        <SelectCategory
+          gameData={data}
+          setFilteredByCategory={setFilteredByCategory}
+          filteredByCategory={filteredByCategory}
+        />
       ) : (
         <></>
       )}
@@ -117,6 +114,7 @@ export function Home() {
           data &&
           !onCategoryFilter &&
           !onInputFilter &&
+          !onFavorites &&
           gameList?.map((gameData) => (
             <Cards
               key={gameData.id}
@@ -147,6 +145,20 @@ export function Home() {
               genre={gameData.genre}
             />
           ))}
+        {!error &&
+          data &&
+          onFavorites &&
+          favorites
+            ?.slice()
+            .reverse()
+            .map((gameData) => (
+              <Cards
+                key={gameData.id}
+                thumbnail={gameData.thumbnail}
+                title={gameData.title}
+                genre={gameData.genre}
+              />
+            ))}
       </div>
     </section>
   );

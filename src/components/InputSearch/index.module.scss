@@ -1,0 +1,51 @@
+.search {
+  width: 19.5rem;
+  background-color: #fff;
+
+  overflow: hidden;
+  border-radius: 4px;
+
+  form {
+    position: relative;
+    width: 19.5rem;
+
+    input {
+      width: 90%;
+
+      border: none;
+      padding: 0.5rem;
+
+      outline: none;
+
+      font-size: 0.875rem;
+
+      &::placeholder {
+        color: rgb(0, 0, 0, 0.30);
+      }
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+
+      cursor: pointer;
+    }
+
+    svg {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+@media screen and (max-width: 330px){
+  .search {
+    width: 15.5rem;
+    padding: 0 0.3rem;
+  }
+  form {
+    width: 15.5rem;
+  }
+}

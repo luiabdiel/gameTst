@@ -1,11 +1,12 @@
 import { Header, Home } from "./components";
+import { AppProvider } from "./context";
 import "./styles/global.scss";
 
 export function App() {
   return (
-   <>
-    <Header />
-    <Home />
-   </>
+    <AppProvider>
+      <Header />
+      <Home />
+    </AppProvider>
   );
 }

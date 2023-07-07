@@ -1,0 +1,12 @@
+.container {
+  border: 2px solid #2455db;
+
+  padding: 0.50rem 0.25rem;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 330px){
+  .container {
+    padding: 0.10rem 0.25rem;
+  }
+}

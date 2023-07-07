@@ -1,11 +1,11 @@
 import { GameData } from "../../interface/GameData";
-import S from "./SelectCategory.module.scss";
+import S from "./index.module.scss";
 
-interface SelectCategoryProps {
+export type SelectCategoryProps = {
   gameData: GameData[];
   setFilteredByCategory: React.Dispatch<React.SetStateAction<string>>;
   filteredByCategory: string;
-}
+};
 
 export function SelectCategory({
   gameData,
@@ -23,19 +23,18 @@ export function SelectCategory({
   }
 
   return (
-    <div className={S["container"]}>
-      <select
-        name="select"
-        onChange={(e) => handleCategory(e.target.value)}
-        value={filteredByCategory}
-      >
-        <option value="">Select a category</option>
-        {uniqueCategories.map((category, index) => (
-          <option key={index} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
-    </div>
+    <select
+      className={S["container"]}
+      name="select"
+      onChange={(e) => handleCategory(e.target.value)}
+      value={filteredByCategory}
+    >
+      <option value="">Selecione a categoria</option>
+      {uniqueCategories.map((category, index) => (
+        <option key={index} value={category}>
+          {category}
+        </option>
+      ))}
+    </select>
   );
 }

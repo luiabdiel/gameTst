@@ -1,37 +1,35 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import Search from "../../assets/search.svg";
-import S from "./inputSearch.module.scss";
+import { SearchIcon } from "..";
+import { useInputSearch } from "../../hooks";
+import S from "./index.module.scss";
 
 type Input = {
   search: string;
 };
 
-interface InputSearchProps {
-  setInputFilter: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export function InputSearch({ setInputFilter }: InputSearchProps) {
+export function InputSearch() {
+  const { setInputFilter } = useInputSearch();
   const { register, handleSubmit } = useForm<Input>();
 
   const onSearch: SubmitHandler<Input> = ({ search }) => {
     if (search.length > 0) {
       setInputFilter(search);
     } else {
-      setInputFilter('');
+      setInputFilter("");
     }
   };
 
   return (
     <div className={S["search"]}>
-      <form onSubmit={handleSubmit(onSearch)}>
+      <form role="form" onSubmit={handleSubmit(onSearch)}>
         <input
           type="text"
           {...register("search")}
           defaultValue={""}
-          placeholder="Enter the name of the game"
+          placeholder="Digite o nome do jogo"
         />
         <button type="submit">
-          <img src={Search} alt="" />
+          <SearchIcon />
         </button>
       </form>
     </div>

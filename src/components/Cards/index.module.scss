@@ -1,14 +1,22 @@
 .container {
   height: 19.75rem;
-  max-width: 250px;
-
-  margin: 0 auto;
+  max-width: 15.625rem;
 
   border: 2px solid rgba(36, 85, 219, 0.20);
   border-radius: 8px;
 
   .content {
     padding: 0.5rem;
+
+    position: relative;
+  }
+
+  svg {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+    cursor: pointer;
   }
 
   img {
@@ -32,5 +40,12 @@
 
   p {
     font-size: 0.875rem;
+  }
+}
+
+@media screen and (max-width: 531px){
+  .container {
+    height: 23rem;
+    max-width: 30rem;
   }
 }

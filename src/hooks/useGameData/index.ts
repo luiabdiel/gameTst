@@ -1,6 +1,6 @@
 import axios, { AxiosPromise } from "axios";
-import { GameData } from "../interface/GameData";
 import { useQuery } from "@tanstack/react-query";
+import { GameData } from "../../interface/GameData";
 
 const API_URL = "https://games-test-api-81e9fb0d564a.herokuapp.com/api/data";
 
