@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SearchIcon } from "..";
 import { useInputSearch } from "../../hooks";
-import S from "./index.module.scss";
+import * as S from "./styles";
 
 type Input = {
   search: string;
@@ -20,18 +20,18 @@ export function InputSearch() {
   };
 
   return (
-    <div className={S["search"]}>
-      <form role="form" onSubmit={handleSubmit(onSearch)}>
-        <input
+    <S.Container>
+      <S.Form role="form" onSubmit={handleSubmit(onSearch)}>
+        <S.Input
           type="text"
           {...register("search")}
           defaultValue={""}
           placeholder="Digite o nome do jogo"
         />
-        <button type="submit">
+        <S.Button type="submit">
           <SearchIcon />
-        </button>
-      </form>
-    </div>
+        </S.Button>
+      </S.Form>
+    </S.Container>
   );
 }

@@ -1,15 +1,21 @@
-.container {
+import { styled } from 'styled-components';
+
+export const Container = styled.div`
   height: 19.75rem;
   max-width: 15.625rem;
 
-  border: 2px solid rgba(36, 85, 219, 0.20);
+  border: 2px solid ${({ theme }) => theme['border-card']};
   border-radius: 8px;
 
-  .content {
-    padding: 0.5rem;
-
-    position: relative;
+  @media screen and (max-width: 531px){
+    height: 23rem;
+    max-width: 30rem;
   }
+`
+export const Content = styled.div`
+  padding: 0.5rem;
+
+  position: relative;
 
   svg {
     position: absolute;
@@ -41,11 +47,4 @@
   p {
     font-size: 0.875rem;
   }
-}
-
-@media screen and (max-width: 531px){
-  .container {
-    height: 23rem;
-    max-width: 30rem;
-  }
-}
+`

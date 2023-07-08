@@ -1,4 +1,6 @@
-.container {
+import { styled } from 'styled-components';
+
+export const Container = styled.section`
   display: flex;
   flex-wrap: wrap;
   width: 100vw;
@@ -7,9 +9,12 @@
   margin: 0 auto;
 
   padding: 1rem;
-}
 
-.container-grid {
+  @media screen and (max-width: 531px){
+    padding: 1rem 3.25rem;
+  }
+`
+export const ContentGrid = styled.div`
   width: 100%;
 
   padding-top: 1rem;
@@ -17,10 +22,4 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 50px 100px;
-}
-
-@media screen and (max-width: 531px){
-  .container {
-    padding: 1rem 3.25rem;
-  }
-}
+`

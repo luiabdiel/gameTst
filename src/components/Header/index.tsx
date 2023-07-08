@@ -1,16 +1,17 @@
 import { FavoritesButton, InputSearch } from "..";
-import S from "./index.module.scss";
+import * as S from "./styles";
+// import S from "./index.module.scss";
 
 export function Header() {
   return (
-    <header>
-      <div className={S["content"]}>
+    <S.Header>
+      <S.Content>
         <h1>App Masters Games</h1>
-        <div className={S["btn-group"]}>
+        <S.BtnGroup>
           <FavoritesButton />
           <InputSearch />
-        </div>
-      </div>
-    </header>
+        </S.BtnGroup>
+      </S.Content>
+    </S.Header>
   );
 }

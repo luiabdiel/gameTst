@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { FavoriteIcon, UnfavoriteIcon } from "..";
 import { useFavorite } from "../../hooks";
 import { GameData } from "../../interface/GameData";
-import S from "./index.module.scss";
+import * as S from "./styles";
 
 export function Cards({ thumbnail, title, genre }: GameData) {
   const { favorites, setFavorites } = useFavorite();
@@ -32,8 +32,8 @@ export function Cards({ thumbnail, title, genre }: GameData) {
   const isFavorite = favorites && favorites.some((game) => game.title === title);
 
   return (
-    <div className={S["container"]}>
-      <div className={S["content"]}>
+    <S.Container>
+      <S.Content>
         <img src={thumbnail} alt={title} />
         {isFavorite ? (
           <UnfavoriteIcon onClick={() => removeFavorite()} />
@@ -48,7 +48,7 @@ export function Cards({ thumbnail, title, genre }: GameData) {
             Gênero: <span>{genre}</span>
           </p>
         </div>
-      </div>
-    </div>
+      </S.Content>
+    </S.Container>
   );
 }

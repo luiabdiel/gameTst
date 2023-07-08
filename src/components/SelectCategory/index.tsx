@@ -1,5 +1,5 @@
 import { GameData } from "../../interface/GameData";
-import S from "./index.module.scss";
+import * as S from "./styles";
 
 export type SelectCategoryProps = {
   gameData: GameData[];
@@ -23,10 +23,9 @@ export function SelectCategory({
   }
 
   return (
-    <select
-      className={S["container"]}
+    <S.Select
       name="select"
-      onChange={(e) => handleCategory(e.target.value)}
+      onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleCategory(e.target.value)}
       value={filteredByCategory}
     >
       <option value="">Selecione a categoria</option>
@@ -35,6 +34,6 @@ export function SelectCategory({
           {category}
         </option>
       ))}
-    </select>
+    </S.Select>
   );
 }
