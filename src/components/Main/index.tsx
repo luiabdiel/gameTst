@@ -3,9 +3,9 @@ import { useGameData } from "../../hooks/useGameData";
 import { useFavorite, useInputSearch } from "../../hooks";
 import { GameData } from "../../interface/GameData";
 import { Cards, ErrorMessage, Loading, SelectCategory } from "..";
-import S from "./index.module.scss";
+import * as S from "./styles";
 
-export function Home() {
+export function Main() {
   const { inputFilter } = useInputSearch();
   const { favorites, onFavorites } = useFavorite();
 
@@ -68,7 +68,7 @@ export function Home() {
   }, [filteredByCategory, inputFilter]);
 
   return (
-    <section className={S["container"]}>
+    <S.Container>
       {isLoading && <Loading />}
 
       {error &&
@@ -109,7 +109,7 @@ export function Home() {
       ) : (
         <></>
       )}
-      <div className={S["container-grid"]}>
+      <S.ContentGrid>
         {!error &&
           data &&
           !onCategoryFilter &&
@@ -159,7 +159,7 @@ export function Home() {
                 genre={gameData.genre}
               />
             ))}
-      </div>
-    </section>
+      </S.ContentGrid>
+    </S.Container>
   );
 }

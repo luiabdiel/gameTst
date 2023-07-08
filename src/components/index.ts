@@ -1,5 +1,5 @@
 export * from "./Header";
-export * from "./Home";
+export * from "./Main";
 export * from "./SelectCategory";
 export * from "./Cards";
 export * from "./InputSearch";
