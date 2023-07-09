@@ -8,7 +8,7 @@
   .box {
     position: relative;
     width: 380px;
-    height: 420px;
+    height: 480px;
 
     background-color: #1c1c1c;
 
@@ -62,15 +62,15 @@
           transition: 0.5s;
           z-index: 10;
 
-          &:valid ~ span,
+          &:not(:placeholder-shown) ~ span,
           &:focus ~ span {
             color: #fff;
             font-size: 0.75rem;
             transform: translateY(-34px);
           }
 
-          &:valid ~ i,
-          &:focus ~ i {
+          &:not(:placeholder-shown) ~ i,
+          &:focus ~ i{
             height: 44px;
           }
         }
@@ -124,6 +124,13 @@
             color: #fff;
           }
         }
+      }
+
+      .error-text {
+        margin-top: 4px;
+
+        color: red;
+        font-size: 12px;
       }
     }
 
