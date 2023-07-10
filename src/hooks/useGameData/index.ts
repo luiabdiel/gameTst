@@ -1,4 +1,4 @@
-import axios, { AxiosPromise } from "axios";
+import axios, { AxiosError, AxiosPromise } from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { GameData } from "../../interface/GameData";
 
@@ -17,7 +17,7 @@ const fetchData = async (): AxiosPromise<GameData[]> => {
 export function useGameData() {
   const query = useQuery({
     queryFn: fetchData,
-    queryKey: ["snack-data"],
+    queryKey: ["game-data"],
     retry: false,
     refetchOnWindowFocus: false
   });
@@ -25,6 +25,6 @@ export function useGameData() {
   return {
     ...query,
     data: query.data?.data,
-    error: query.error
+    error: query.error as AxiosError
   }
 }
