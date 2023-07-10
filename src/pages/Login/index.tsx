@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
-import S from "./index.module.scss";
 import { UseAuth } from "../../hooks";
+import * as S from "./styles";
 
 interface LoginFormInput {
   email: string;
@@ -28,12 +28,12 @@ export function Login() {
   };
 
   return (
-    <div className={S["container"]}>
-      <div className={S["box"]}>
-        <span className={S["border-line"]}></span>
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <S.Container>
+      <div className="box">
+        <S.BorderLine />
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
           <h2>Entrar</h2>
-          <div className={S["input-box"]}>
+          <div className="input-box">
             <input
               {...register("email", {
                 required: true,
@@ -46,16 +46,16 @@ export function Login() {
             <i></i>
           </div>
           {(errors.email?.type === "required" && (
-            <span className={S["error-text"]}>
+            <span className="error-text">
               É necessário preencher seu email corretamente
             </span>
           )) ||
             (errors.email?.type === "pattern" && (
-              <span className={S["error-text"]}>
+              <span className="error-text">
                 Preencha com um email válido
               </span>
             ))}
-          <div className={S["input-box"]}>
+          <div className="input-box">
             <input
               {...register("password", {
                 required: true,
@@ -68,17 +68,19 @@ export function Login() {
             <i></i>
           </div>
           {errors.password?.type === "required" && (
-            <span className={S["error-text"]}>
+            <span className="error-text">
               É necessário preencher sua senha corretamente
             </span>
           )}
-          <div className={S["links"]}>
+          <div className="links">
             <Link to={"/forgot"}>Esqueceu sua senha?</Link>
             <Link to={"/register"}>Cadastre-se</Link>
           </div>
-          <input type="submit" value="Entrar" />
-        </form>
+          <S.SubmitButton type="submit" value="Entrar" />
+        </S.Form>
+        <S.BeforeElement />
+        <S.AfterElement />
       </div>
-    </div>
+    </S.Container>
   );
 }

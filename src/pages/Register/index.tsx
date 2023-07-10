@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
-import S from "./index.module.scss";
 import { UseAuth } from "../../hooks";
 import { AppUser } from "../../@types/appUser";
 import { createUser } from "../../services/db";
+import * as S from "./styles";
 
 interface RegisterFormInput {
   name: string;
@@ -45,12 +45,12 @@ export function Register() {
   };
 
   return (
-    <div className={S["container"]}>
-      <div className={S["box"]}>
-        <span className={S["border-line"]}></span>
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <S.Container>
+      <div className="box">
+        <S.BorderLine />
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
           <h2>Crie uma conta</h2>
-          <div className={S["input-box"]}>
+          <div className="input-box">
             <input
               {...register("name", {
                 required: true,
@@ -63,11 +63,11 @@ export function Register() {
             <i></i>
           </div>
           {errors.name?.type === "required" && (
-            <span className={S["error-text"]}>
+            <span className="error-text">
               É necessário preencher seu nome
             </span>
           )}
-          <div className={S["input-box"]}>
+          <div className="input-box">
             <input
               {...register("birthday", { required: true, valueAsDate: true })}
               type="date"
@@ -77,11 +77,11 @@ export function Register() {
             <i></i>
           </div>
           {errors.birthday?.type === "required" && (
-            <span className={S["error-text"]}>
+            <span className="error-text">
               É necessário preencher sua data de nascimento
             </span>
           )}
-          <div className={S["input-box"]}>
+          <div className="input-box">
             <input
               {...register("email", {
                 required: true,
@@ -93,17 +93,17 @@ export function Register() {
             <i></i>
           </div>
           {(errors.email?.type === "required" && (
-            <span className={S["error-text"]}>
+            <span className="error-text">
               É necessário preencher seu email corretamente
             </span>
           )) ||
             (errors.email?.type === "pattern" && (
-              <span className={S["error-text"]}>
+              <span className="error-text">
                 Preencha com um email válido
               </span>
             ))}
 
-          <div className={S["input-box"]}>
+          <div className="input-box">
             <input
               {...register("password", {
                 required: true,
@@ -116,17 +116,19 @@ export function Register() {
             <i></i>
           </div>
           {errors.password?.type === "required" && (
-            <span className={S["error-text"]}>
+            <span className="error-text">
               É necessário preencher sua senha corretamente
             </span>
           )}
-          <div className={S["links"]}>
+          <div className="links">
             <Link to={"/auth"}>Login</Link>
           </div>
-          <input type="submit" value="Criar" />
-          {successSignUp && <p className={S['success-msg']}>Usuário criado com sucesso!!</p>}
-        </form>
+          <S.SubmitButton type="submit" value="Criar" />
+          {successSignUp && <p className='success-msg'>Usuário criado com sucesso!!</p>}
+        </S.Form>
+        <S.BeforeElement />
+        <S.AfterElement />
       </div>
-    </div>
+    </S.Container>
   );
 }

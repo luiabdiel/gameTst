@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
-import S from "./index.module.scss";
 import { UseAuth } from "../../hooks";
+import * as S from "./styles";
 
 interface ForgotInput {
   email: string;
@@ -22,12 +22,12 @@ export function Forgot() {
   };
 
   return (
-    <div className={S["container"]}>
-      <div className={S["box"]}>
-        <span className={S["border-line"]}></span>
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <S.Container>
+      <div className="box">
+        <S.BorderLine />
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
           <h2>Preencha seu email para recuperar senha</h2>
-          <div className={S["input-box"]}>
+          <div className="input-box">
             <input
               {...register("email", {
                 required: true,
@@ -40,21 +40,23 @@ export function Forgot() {
             <i></i>
           </div>
           {(errors.email?.type === "required" && (
-            <span className={S["error-text"]}>
+            <span className="error-text">
               É necessário preencher seu email corretamente
             </span>
           )) ||
             (errors.email?.type === "pattern" && (
-              <span className={S["error-text"]}>
+              <span className="error-text">
                 Preencha com um email válido
               </span>
             ))}
-          <div className={S["links"]}>
+          <div className="links">
             <Link to={"/auth"}>Fazer login</Link>
           </div>
-          <input type="submit" value="Recuperar senha" />
-        </form>
+          <S.SubmitButton type="submit" value="Recuperar senha" />
+        </S.Form>
+        <S.BeforeElement />
+        <S.AfterElement />
       </div>
-    </div>
+    </S.Container>
   );
 }
