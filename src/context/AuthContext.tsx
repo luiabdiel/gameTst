@@ -17,7 +17,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [signData, setSignData] = useState<SignIn>(null!);
-  const [successSignUp, setSuccessSignUp] = useState(false);
+  const [successSignUp] = useState(false);
 
   async function handleSignIn(data: SignIn): Promise<string | User> {
     try {

@@ -4,7 +4,7 @@ import { useFavorite, useInputSearch } from "../../hooks";
 import { GameData } from "../../interface/GameData";
 import { Cards, ErrorMessage, Loading, SelectCategory } from "..";
 import * as S from "./styles";
-import { getAllUsers, getUser } from "../../services/db";
+import { getUser } from "../../services/db";
 
 export function Main() {
   const [onInputFilter, setOnInputFilter] = useState(false);
