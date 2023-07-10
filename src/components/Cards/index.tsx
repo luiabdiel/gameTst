@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { FavoriteIcon, UnfavoriteIcon } from "..";
-import { useFavorite, useGameData } from "../../hooks";
+import { useFavorite } from "../../hooks";
 import { GameData } from "../../interface/GameData";
 import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
@@ -8,7 +8,7 @@ import * as S from "./styles";
 export function Cards({ thumbnail, title, genre }: GameData) {
   const navigate = useNavigate();
   const { favorites, setFavorites } = useFavorite();
-  const { data } = useGameData();
+  // const { data } = useGameData();
 
   // useEffect(() => {
   //   const storedFavorites = localStorage.getItem("favorites");

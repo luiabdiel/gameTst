@@ -40,7 +40,7 @@ export async function updateUser(uid: string, userData: AppUser) {
   updates[`users/${uid}`] = userData;
 
   const updateUser = await update(ref(database), updates)
-    .then((res) => {
+    .then(() => {
       return "User updated successfully";
     }).catch(() => {
       return "Error updating user";
@@ -51,7 +51,7 @@ export async function updateUser(uid: string, userData: AppUser) {
 
 export async function createUser(userData: AppUser) {
   const response = set(ref(database, `users/${userData.uid}`), userData)
-    .then((res) => {
+    .then(() => {
     return "User created successfully";
     }).catch(() => {
     return "Error creating user";
