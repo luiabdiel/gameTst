@@ -6,11 +6,11 @@ import { CardsDataProvider } from "./CardsContext";
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <AuthProvider>
-      <CardsDataProvider>
-        <InputSearchProvider>
+      <InputSearchProvider>
+        <CardsDataProvider>
           <FavoriteProvider>{children}</FavoriteProvider>
-        </InputSearchProvider>
-      </CardsDataProvider>
+        </CardsDataProvider>
+      </InputSearchProvider>
     </AuthProvider>
   );
 };
