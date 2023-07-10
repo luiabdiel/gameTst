@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useGameData } from "../../hooks/useGameData";
 import { useFavorite, useInputSearch } from "../../hooks";
 import { GameData } from "../../interface/GameData";
 import { Cards, ErrorMessage, Loading, SelectCategory } from "..";
+import { useCards } from "../../hooks/useCards";
 import * as S from "./styles";
 
 export function Main() {
@@ -31,15 +31,15 @@ export function Main() {
   ]);
   const { inputFilter } = useInputSearch();
   const { favorites, onFavorites } = useFavorite();
-  const { data, error, isLoading } = useGameData();
-  const gameList = data?.slice(0, 27);
+  const { dataGames, isLoading, error } = useCards();
+  const gameList = dataGames?.slice(0, 27);
 
   useEffect(() => {
     if (filteredByCategory.length > 0) {
       setOnCategoryFilter(true);
 
-      if (data) {
-        const filtereds = data.filter(
+      if (dataGames) {
+        const filtereds = dataGames.filter(
           (game) => game.genre === filteredByCategory
         );
 
@@ -52,8 +52,8 @@ export function Main() {
     if (inputFilter.length > 0) {
       setOnInputFilter(true);
 
-      if (data) {
-        const filtereds = data.filter((game) =>
+      if (dataGames) {
+        const filtereds = dataGames.filter((game) =>
           game.title.toLowerCase().includes(inputFilter.toLowerCase())
         );
 
@@ -69,9 +69,9 @@ export function Main() {
       {isLoading && <Loading />}
 
       {error ? <ErrorMessage error={error} /> : <></>}
-      {!error && data ? (
+      {!error && dataGames ? (
         <SelectCategory
-          gameData={data}
+          gameData={dataGames}
           setFilteredByCategory={setFilteredByCategory}
           filteredByCategory={filteredByCategory}
         />
@@ -80,7 +80,7 @@ export function Main() {
       )}
       <S.ContentGrid>
         {!error &&
-          data &&
+          dataGames &&
           !onCategoryFilter &&
           !onInputFilter &&
           !onFavorites &&
@@ -93,7 +93,7 @@ export function Main() {
             />
           ))}
         {!error &&
-          data &&
+          dataGames &&
           onCategoryFilter &&
           filteredGamesByCategories?.map((gameData) => (
             <Cards
@@ -104,7 +104,7 @@ export function Main() {
             />
           ))}
         {!error &&
-          data &&
+          dataGames &&
           onInputFilter &&
           filteredGamesByInputSearch?.map((gameData) => (
             <Cards
@@ -115,7 +115,7 @@ export function Main() {
             />
           ))}
         {!error &&
-          data &&
+          dataGames &&
           onFavorites &&
           favorites
             ?.slice()
