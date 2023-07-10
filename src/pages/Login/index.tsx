@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import S from "./index.module.scss";
 import { UseAuth } from "../../hooks";
@@ -10,6 +10,8 @@ interface LoginFormInput {
 
 export function Login() {
   const { handleSignIn } = UseAuth();
+  const navigate = useNavigate();
+
 
   const {
     register,
@@ -19,6 +21,10 @@ export function Login() {
 
   const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
     handleSignIn(data);
+
+    if (localStorage.getItem("appGameUser")) {
+      navigate("/")
+    }
   };
 
   return (

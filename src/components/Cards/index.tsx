@@ -1,25 +1,33 @@
 import { useEffect } from "react";
 import { FavoriteIcon, UnfavoriteIcon } from "..";
-import { useFavorite } from "../../hooks";
+import { useFavorite, useGameData } from "../../hooks";
 import { GameData } from "../../interface/GameData";
 import * as S from "./styles";
+import { useNavigate } from "react-router-dom";
 
 export function Cards({ thumbnail, title, genre }: GameData) {
+  const navigate = useNavigate();
   const { favorites, setFavorites } = useFavorite();
+  const { data } = useGameData();
 
-  useEffect(() => {
-    const storedFavorites = localStorage.getItem("favorites");
+  // useEffect(() => {
+  //   const storedFavorites = localStorage.getItem("favorites");
 
-    if (storedFavorites) {
-      setFavorites(JSON.parse(storedFavorites));
-    }
-  }, []);
+  //   if (storedFavorites) {
+  //     setFavorites(JSON.parse(storedFavorites));
+  //   }
+  // }, []);
 
   function addFavorite(newGame: GameData) {
-    const updatedFavorites = [...favorites, newGame];
-    setFavorites(updatedFavorites);
+    if (localStorage.getItem("appGameUser")) {
+      const updatedFavorites = [...favorites, newGame];
+      setFavorites(updatedFavorites);
 
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      // localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    } else {
+      alert("Você precisa estar logado para favoritar um jogo");
+      navigate("/auth");
+    }
   }
 
   function removeFavorite() {
