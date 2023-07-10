@@ -4,7 +4,6 @@ import { useFavorite, useInputSearch } from "../../hooks";
 import { GameData } from "../../interface/GameData";
 import { Cards, ErrorMessage, Loading, SelectCategory } from "..";
 import * as S from "./styles";
-import { getUser } from "../../services/db";
 
 export function Main() {
   const [onInputFilter, setOnInputFilter] = useState(false);
@@ -108,7 +107,6 @@ export function Main() {
       ) : (
         <></>
       )}
-      <button onClick={() => getUser("jTrubtqk7TSGRFSGh1id1wCdbn73")}>Pegar usuário</button>
       <S.ContentGrid>
         {!error &&
           data &&
