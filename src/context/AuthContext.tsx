@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { User, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { SetStateAction, createContext, useState } from "react";
 import { SignIn, SignUp, Forgot } from "../@types";
 import { auth } from '../services/firebaseConfig';
@@ -7,7 +7,7 @@ interface AuthContextData {
   signData: SignIn;
   successSignUp: boolean;
   setSignData: React.Dispatch<SetStateAction<SignIn>>;
-  handleSignIn: (data: SignIn) => void;
+  handleSignIn: (data: SignIn) => Promise<string | User>;
   handleSignUp: (data: SignUp) => void;
   handleForgot: (data: Forgot) => void;
   handleSignOut: () => void;
@@ -19,7 +19,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [signData, setSignData] = useState<SignIn>(null!);
   const [successSignUp, setSuccessSignUp] = useState(false);
 
-  async function handleSignIn(data: SignIn) {
+  async function handleSignIn(data: SignIn): Promise<string | User> {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
       const user = userCredential.user;
@@ -30,7 +30,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       return user;
     } catch (error) {
-      return error;
+      return "Algo inesperado aconteceu.";
     }
   }
 

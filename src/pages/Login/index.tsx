@@ -12,17 +12,17 @@ export function Login() {
   const { handleSignIn } = UseAuth();
   const navigate = useNavigate();
 
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInput>();
 
-  const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
-    handleSignIn(data);
+    const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
+    const user = await handleSignIn(data);
 
-    if (localStorage.getItem("appGameUser")) {
+    //@ts-ignore
+    if (user.email) {
       navigate("/")
     }
   };
