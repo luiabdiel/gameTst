@@ -33,7 +33,6 @@ export function Main() {
   const { favorites, onFavorites } = useFavorite();
   const { data, error, isLoading } = useGameData();
   const gameList = data?.slice(0, 27);
-  const errorCodes = [500, 502, 503, 504, 507, 508, 509];
 
   useEffect(() => {
     if (filteredByCategory.length > 0) {
@@ -69,35 +68,7 @@ export function Main() {
     <S.Container>
       {isLoading && <Loading />}
 
-      {error &&
-      // @ts-ignore
-      error.response &&
-      // @ts-ignore
-      errorCodes.includes(error.response.status) ? (
-        <ErrorMessage text="O servidor falhou em responder, tente recarregar a página" />
-      ) : (
-        <></>
-      )}
-      {error &&
-      // @ts-ignore
-      error.response &&
-      // @ts-ignore
-      errorCodes.indexOf(error.response.status) === -1 ? (
-        <ErrorMessage
-          text="O servidor não conseguirá responder por agora, tente voltar novamente
-        mais tarde"
-        />
-      ) : (
-        <></>
-      )}
-      {
-        // @ts-ignore
-        error && error.message === "timeout of 5000ms exceeded" ? (
-          <ErrorMessage text="O servidor demorou para responder, tente mais tarde" />
-        ) : (
-          <></>
-        )
-      }
+      {error ? <ErrorMessage error={error} /> : <></>}
       {!error && data ? (
         <SelectCategory
           gameData={data}
