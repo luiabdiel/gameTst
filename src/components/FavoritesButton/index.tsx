@@ -4,9 +4,13 @@ import * as S from "./styles";
 export function FavoritesButton() {
   const { favorites, onFavorites, setOnFavorites } = useFavorite();
 
+  function handleFavorite() {
+    setOnFavorites(!onFavorites);
+  }
+
   return (
     <S.Button
-      onClick={() => setOnFavorites(!onFavorites)}
+      onClick={handleFavorite}
     >
       Favoritos{" "}
       {favorites && favorites.length > 0 ? (
