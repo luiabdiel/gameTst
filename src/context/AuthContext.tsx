@@ -5,20 +5,18 @@ import { auth } from '../services/firebaseConfig';
 
 interface AuthContextData {
   signData: SignIn;
-
   successSignUp: boolean;
   setSignData: React.Dispatch<SetStateAction<SignIn>>;
   handleSignIn: (data: SignIn) => void;
   handleSignUp: (data: SignUp) => void;
-  handleSignOut: () => void;
   handleForgot: (data: Forgot) => void;
+  handleSignOut: () => void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [signData, setSignData] = useState<SignIn>(null!);
-
   const [successSignUp, setSuccessSignUp] = useState(false);
 
   async function handleSignIn(data: SignIn) {
@@ -26,8 +24,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
       const user = userCredential.user;
 
-      console.log(user)
-      return user
+      if (user) {
+        localStorage.setItem("appGameUser", JSON.stringify(user));
+      }
+
+      return user;
     } catch (error) {
       return error;
     }
