@@ -6,9 +6,6 @@ import { Cards, ErrorMessage, Loading, SelectCategory } from "..";
 import * as S from "./styles";
 
 export function Main() {
-  const { inputFilter } = useInputSearch();
-  const { favorites, onFavorites } = useFavorite();
-
   const [onInputFilter, setOnInputFilter] = useState(false);
   const [onCategoryFilter, setOnCategoryFilter] = useState(false);
   const [filteredByCategory, setFilteredByCategory] = useState("");
@@ -32,7 +29,8 @@ export function Main() {
       title: "",
     },
   ]);
-
+  const { inputFilter } = useInputSearch();
+  const { favorites, onFavorites } = useFavorite();
   const { data, error, isLoading } = useGameData();
   const gameList = data?.slice(0, 27);
   const errorCodes = [500, 502, 503, 504, 507, 508, 509];
@@ -151,14 +149,15 @@ export function Main() {
           favorites
             ?.slice()
             .reverse()
-            .map((gameData) => (
+            .map((gameData, index) => (
               <Cards
-                key={gameData.id}
+                key={index}
                 thumbnail={gameData.thumbnail}
                 title={gameData.title}
                 genre={gameData.genre}
               />
-            ))}
+            )
+          )}
       </S.ContentGrid>
     </S.Container>
   );
