@@ -8,7 +8,7 @@ interface AuthContextData {
   successSignUp: boolean;
   setSignData: React.Dispatch<SetStateAction<SignIn>>;
   handleSignIn: (data: SignIn) => Promise<string | User>;
-  handleSignUp: (data: SignUp) => void;
+  handleSignUp: (data: SignUp) => Promise<User>;
   handleForgot: (data: Forgot) => void;
   handleSignOut: () => void;
 }
@@ -30,7 +30,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       return user;
     } catch (error) {
-      return "Algo inesperado aconteceu.";
+      throw new Error("Não foi possível fazer o login. Tente novamente mais tarde.");
     }
   }
 
@@ -45,7 +45,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       return user;
     } catch (error) {
-      return error;
+      throw new Error("Não foi possível fazer o cadastro. Tente novamente mais tarde.");
     }
   }
 

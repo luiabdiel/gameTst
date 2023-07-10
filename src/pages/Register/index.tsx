@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import S from "./index.module.scss";
 import { UseAuth } from "../../hooks";
+import { AppUser } from "../../@types/appUser";
+import { createUser } from "../../services/db";
 
 interface RegisterFormInput {
   name: string;
@@ -12,6 +14,7 @@ interface RegisterFormInput {
 
 export function Register() {
   const { handleSignUp, successSignUp } = UseAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -19,10 +22,26 @@ export function Register() {
     formState: { errors },
   } = useForm<RegisterFormInput>();
 
-  const onSubmit: SubmitHandler<RegisterFormInput> = (data) => {
+  const onSubmit: SubmitHandler<RegisterFormInput> = async (data) => {
     data.birthday.setDate(data.birthday.getDate() + 1);
 
-    handleSignUp(data);
+    const user = await handleSignUp(data);
+
+    if (user) {
+      const newUserData: AppUser = {
+        uid: user.uid,
+        name: data.name,
+        birthDate: data.birthday,
+        email: data.email,
+        favorites: [],
+        gifts_list: [],
+        ratings: [],
+      }
+
+      await createUser(newUserData);
+
+      navigate("/");
+    }
   };
 
   return (

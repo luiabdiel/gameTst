@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { FavoriteIcon, UnfavoriteIcon } from "..";
 import { useFavorite, useGameData } from "../../hooks";
 import { GameData } from "../../interface/GameData";
-import * as S from "./styles";
 import { useNavigate } from "react-router-dom";
+import * as S from "./styles";
 
 export function Cards({ thumbnail, title, genre }: GameData) {
   const navigate = useNavigate();
