@@ -1,4 +1,3 @@
-// import { useEffect } from "react";
 import { FavoriteIcon, UnfavoriteIcon } from "..";
 import { useFavorite } from "../../hooks";
 import { GameData } from "../../interface/GameData";
@@ -7,47 +6,44 @@ import * as S from "./styles";
 
 export function Cards({ thumbnail, title, genre }: GameData) {
   const navigate = useNavigate();
-  const { favorites, setFavorites } = useFavorite();
-  // const { data } = useGameData();
+  const { favorites, addFavorite, removeFavorite } = useFavorite();
 
-  // useEffect(() => {
-  //   const storedFavorites = localStorage.getItem("favorites");
-
-  //   if (storedFavorites) {
-  //     setFavorites(JSON.parse(storedFavorites));
-  //   }
-  // }, []);
-
-  function addFavorite(newGame: GameData) {
+  function newFavorite(newGame: GameData) {
     if (localStorage.getItem("appGameUser")) {
-      const updatedFavorites = [...favorites, newGame];
-      setFavorites(updatedFavorites);
+      const user = localStorage.getItem("appGameUser");
+      const uid = user && JSON.parse(user).uid;
 
-      // localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      addFavorite(uid, newGame);
     } else {
       alert("Você precisa estar logado para favoritar um jogo");
       navigate("/auth");
     }
   }
 
-  function removeFavorite() {
-    const updatedFavorites = favorites.filter((game) => game.title !== title);
-    setFavorites(updatedFavorites);
+  function favoriteRemove(title: string) {
+    if (localStorage.getItem("appGameUser")) {
+      const user = localStorage.getItem("appGameUser");
+      const uid = user && JSON.parse(user).uid;
 
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      removeFavorite(uid, title);
+    } else {
+      alert("Você precisa estar logado para remover um jogo");
+      navigate("/auth");
+    }
   }
 
-  const isFavorite = favorites && favorites.some((game) => game.title === title);
+  const isFavorite =
+    favorites && favorites.some((game) => game.title === title);
 
   return (
     <S.Container>
       <S.Content>
         <img src={thumbnail} alt={title} />
         {isFavorite ? (
-          <UnfavoriteIcon onClick={() => removeFavorite()} />
+          <FavoriteIcon onClick={() => favoriteRemove(title)} />
         ) : (
-          <FavoriteIcon
-            onClick={() => addFavorite({ thumbnail, title, genre })}
+          <UnfavoriteIcon
+            onClick={() => newFavorite({ thumbnail, title, genre })}
           />
         )}
         <div>

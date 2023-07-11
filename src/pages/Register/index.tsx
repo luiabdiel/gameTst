@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UseAuth } from "../../hooks";
 import { AppUser } from "../../@types/appUser";
@@ -12,7 +12,11 @@ interface RegisterFormInput {
   password: string;
 }
 
-export function Register() {
+type RegisterProps = {
+  setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function Register({setIsSignUp}: RegisterProps) {
   const { handleSignUp, successSignUp } = UseAuth();
   const navigate = useNavigate();
 
@@ -121,7 +125,7 @@ export function Register() {
             </span>
           )}
           <div className="links">
-            <Link to={"/auth"}>Login</Link>
+            <p onClick={() => setIsSignUp(false)}>Login</p>
           </div>
           <S.SubmitButton type="submit" value="Criar" />
           {successSignUp && <p className='success-msg'>Usuário criado com sucesso!!</p>}

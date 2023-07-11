@@ -1,6 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { UseAuth } from "../../hooks";
+import { UseAuth, useFavorite } from "../../hooks";
 import * as S from "./styles";
 
 interface LoginFormInput {
@@ -8,8 +8,13 @@ interface LoginFormInput {
   password: string;
 }
 
-export function Login() {
+type LoginProps = {
+  setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export function Login({ setIsSignUp }: LoginProps) {
   const { handleSignIn } = UseAuth();
+  const { getFavoritesList } = useFavorite();
   const navigate = useNavigate();
 
   const {
@@ -18,12 +23,12 @@ export function Login() {
     formState: { errors },
   } = useForm<LoginFormInput>();
 
-    const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
     const user = await handleSignIn(data);
 
-    //@ts-ignore
-    if (user.email) {
-      navigate("/")
+    if (typeof user !== "string") {
+      getFavoritesList(user.uid);
+      navigate("/");
     }
   };
 
@@ -51,9 +56,7 @@ export function Login() {
             </span>
           )) ||
             (errors.email?.type === "pattern" && (
-              <span className="error-text">
-                Preencha com um email válido
-              </span>
+              <span className="error-text">Preencha com um email válido</span>
             ))}
           <div className="input-box">
             <input
@@ -73,8 +76,8 @@ export function Login() {
             </span>
           )}
           <div className="links">
-            <Link to={"/forgot"}>Esqueceu sua senha?</Link>
-            <Link to={"/register"}>Cadastre-se</Link>
+            <p>Esqueceu sua senha?</p>
+            <p onClick={() => setIsSignUp(true)}>Cadastre-se</p>
           </div>
           <S.SubmitButton type="submit" value="Entrar" />
         </S.Form>

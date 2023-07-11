@@ -109,7 +109,7 @@ export const Form = styled.form`
     display: flex;
     justify-content: space-between;
 
-    a {
+    p {
       margin: 10px 0px;
       color: #8f8f8f;
       font-size: 0.75rem;
@@ -118,6 +118,7 @@ export const Form = styled.form`
       &:hover,
       &:nth-child(2) {
         color: #fff;
+        cursor: pointer;
       }
     }
   }
