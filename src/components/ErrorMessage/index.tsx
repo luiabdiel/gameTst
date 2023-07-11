@@ -21,5 +21,5 @@ export function ErrorMessage( {error} : ErrorMessageProps) {
       }
   }, [])
 
-  return <p>{message}</p>;
+  return <p role="paragraph" >{message}</p>;
 }
