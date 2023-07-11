@@ -13,6 +13,8 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
 
     margin: 0 auto;
+
+    background-color: rgba(0,0,0,0.50);
   }
 
   body, input, textarea, button {

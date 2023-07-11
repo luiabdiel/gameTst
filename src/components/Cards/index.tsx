@@ -2,7 +2,10 @@ import { FavoriteIcon, UnfavoriteIcon } from "..";
 import { useFavorite } from "../../hooks";
 import { GameData } from "../../interface/GameData";
 import { useNavigate } from "react-router-dom";
+import Rating from "react-rating";
 import * as S from "./styles";
+import { StarIconEmpty } from "../Icons/StarIconEmpty";
+import { StarIconFull } from "../Icons/StarIconFull";
 
 export function Cards({ thumbnail, title, genre }: GameData) {
   const navigate = useNavigate();
@@ -37,6 +40,14 @@ export function Cards({ thumbnail, title, genre }: GameData) {
 
   return (
     <S.Container>
+      <div>
+          {/* @ts-ignore */}
+          <Rating
+            initialRating={2}
+            emptySymbol={<StarIconEmpty />}
+            fullSymbol={<StarIconFull />}
+          />
+        </div>
       <S.Content>
         <img src={thumbnail} alt={title} />
         {isFavorite ? (
@@ -46,6 +57,7 @@ export function Cards({ thumbnail, title, genre }: GameData) {
             onClick={() => newFavorite({ thumbnail, title, genre })}
           />
         )}
+
         <div>
           <h2>{title}</h2>
           <p>

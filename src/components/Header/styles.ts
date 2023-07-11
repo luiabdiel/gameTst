@@ -31,6 +31,10 @@ export const Content = styled.div`
     text-align: center;
   }
 
+  svg {
+    display: none;
+  }
+
   @media screen and (max-width: 800px){
     flex-direction: column;
     gap: 0.50rem;

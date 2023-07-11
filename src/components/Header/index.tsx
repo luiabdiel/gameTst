@@ -1,12 +1,13 @@
 import { FavoritesButton, InputSearch } from "..";
+import { StarIconEmpty } from "../Icons/StarIconEmpty";
 import * as S from "./styles";
-// import S from "./index.module.scss";
 
 export function Header() {
   return (
     <S.Header>
       <S.Content>
         <h1>App Masters Games</h1>
+        <StarIconEmpty />
         <S.BtnGroup>
           <FavoritesButton />
           <InputSearch />
