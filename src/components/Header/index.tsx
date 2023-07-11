@@ -1,5 +1,5 @@
 import { FavoritesButton, InputSearch } from "..";
-import { StarIconEmpty } from "../Icons/StarIconEmpty";
+import { StarIconEmpty } from "../Icons";
 import * as S from "./styles";
 
 export function Header() {

@@ -3,9 +3,8 @@ import { useFavorite } from "../../hooks";
 import { GameData } from "../../interface/GameData";
 import { useNavigate } from "react-router-dom";
 import Rating from "react-rating";
+import { StarIconEmpty, StarIconFull } from "../Icons";
 import * as S from "./styles";
-import { StarIconEmpty } from "../Icons/StarIconEmpty";
-import { StarIconFull } from "../Icons/StarIconFull";
 
 export function Cards({ thumbnail, title, genre }: GameData) {
   const navigate = useNavigate();
