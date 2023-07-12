@@ -2,6 +2,7 @@ import { child, get, ref, set, update } from "firebase/database";
 import { database } from "./firebaseConfig";
 import { AppUser } from "../@types/appUser";
 import { GameData } from "../interface/GameData";
+import { Rating } from "../@types/rating";
 
 export async function getAllUsers() {
   let users;
@@ -100,4 +101,43 @@ export async function getFavorites(uid: string): Promise<GameData[]> {
   } catch (error) {
     return emptyGameData;
   }
+}
+
+export async function getRatings(uid: string): Promise<Rating[]> {
+  let ratings;
+
+  const emptyGameData = [
+    {
+      title: "",
+      rate: 0,
+    },
+  ];
+
+  try {
+    const response = await get(child(ref(database), `users/${uid}/ratings`));
+
+    ratings = Object.values(response.val()) as Rating[];
+
+    return ratings;
+  } catch (error) {
+    return emptyGameData;
+  }
+}
+
+export async function updateRatings(uid: string, ratings: Rating[]) {
+  console.log("entrou no updateRatings DB")
+  console.log("ratings", ratings)
+  const updates: any = {};
+
+  updates[`users/${uid}/ratings`] = ratings;
+
+  const updateRatings = await update(ref(database), updates)
+    .then(() => {
+      return "User updated successfully";
+    })
+    .catch(() => {
+      return "Error updating user";
+    });
+
+  return updateRatings;
 }
