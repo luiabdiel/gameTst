@@ -6,6 +6,7 @@ export const Select = styled.select`
   padding: 0.50rem 0.25rem;
   border-radius: 4px;
 
+  outline: none;
   @media screen and (max-width: 330px){
     padding: 0.10rem 0.25rem;
   }

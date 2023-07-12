@@ -17,7 +17,9 @@ export const Container = styled.div`
 
   .box {
     position: relative;
-    width: 380px;
+    max-width: 380px;
+    min-width: 250px;
+    width: 90%;
     height: 480px;
     background-color: #1c1c1c;
     overflow: hidden;
@@ -29,10 +31,11 @@ export const Form = styled.form`
   position: absolute;
   inset: 4px;
   background-color: #222;
-  padding: 50px 40px;
+  padding: 50px 0; //40px;
   border-radius: 8px;
   z-index: 2;
   display: flex;
+  align-items: center;
   flex-direction: column;
 
   h2 {
@@ -44,7 +47,7 @@ export const Form = styled.form`
 
   .input-box {
     position: relative;
-    width: 300px;
+    width: 80%;
     margin-top: 35px;
 
     input {
@@ -98,8 +101,8 @@ export const Form = styled.form`
       pointer-events: none;
     }
   }
-
   .links {
+    width: 80%;
     display: flex;
     justify-content: space-between;
 
@@ -119,8 +122,11 @@ export const Form = styled.form`
 
   .error-text {
     margin-top: 4px;
+
     color: red;
     font-size: 12px;
+
+    text-align: center;
   }
 `;
 
@@ -146,7 +152,9 @@ export const BeforeElement = styled.div`
   position: absolute;
   top: -50%;
   left: -50%;
-  width: 380px;
+  max-width: 380px;
+  min-width: 250px;
+  width: 90%;
   height: 420px;
   background: linear-gradient(
     0deg,
@@ -166,7 +174,9 @@ export const AfterElement = styled.div`
   position: absolute;
   top: -50%;
   left: -50%;
-  width: 380px;
+  max-width: 380px;
+  min-width: 250px;
+  width: 90%;
   height: 420px;
   background: linear-gradient(
     0deg,
@@ -192,7 +202,9 @@ export const BorderLine = styled.span`
     position: absolute;
     top: -50%;
     left: -50%;
-    width: 380px;
+    max-width: 380px;
+    min-width: 250px;
+    width: 90%;
     height: 420px;
     background: linear-gradient(
       0deg,
@@ -213,7 +225,9 @@ export const BorderLine = styled.span`
     position: absolute;
     top: -50%;
     left: -50%;
-    width: 380px;
+    max-width: 380px;
+    min-width: 250px;
+    width: 90%;
     height: 420px;
     background: linear-gradient(
       0deg,

@@ -71,31 +71,35 @@ export function Cards({ thumbnail, title, genre, rate }: CardsProps) {
 
   return (
     <S.Container>
-      <div>
-        {/* @ts-ignore */}
-        <Rating
-          onChange={(e) => handleRating(e)}
-          initialRating={rate}
-          emptySymbol={<StarIconEmpty />}
-          fullSymbol={<StarIconFull />}
-        />
-      </div>
+      <div className="card-mask"></div>
       <S.Content>
-        <img src={thumbnail} alt={title} />
-        {isFavorite ? (
-          <FavoriteIcon onClick={() => favoriteRemove(title)} />
-        ) : (
-          <UnfavoriteIcon
-            onClick={() => newFavorite({ thumbnail, title, genre, rate })}
+        <div className="rating">
+          {/* @ts-ignore */}
+          <Rating
+            onChange={(e) => handleRating(e)}
+            initialRating={rate}
+            emptySymbol={<StarIconEmpty />}
+            fullSymbol={<StarIconFull />}
           />
-        )}
-
+        </div>
+        <img src={thumbnail} alt={title} />
+        <div className="favorite-icon">
+          {isFavorite ? (
+            <FavoriteIcon onClick={() => favoriteRemove(title)} />
+          ) : (
+            <UnfavoriteIcon
+              onClick={() => newFavorite({ thumbnail, title, genre, rate })}
+            />
+          )}
+        </div>
         <div>
           <h2>{title}</h2>
           <p>
             Gênero: <span>{genre}</span>
           </p>
         </div>
+        <div className="blur-smerald"></div>
+        <div className="blur-blue"></div>
       </S.Content>
     </S.Container>
   );

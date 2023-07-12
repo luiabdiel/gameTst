@@ -76,7 +76,6 @@ export function Login({ setIsSignUp }: LoginProps) {
             </span>
           )}
           <div className="links">
-            <p>Esqueceu sua senha?</p>
             <p onClick={() => setIsSignUp(true)}>Cadastre-se</p>
           </div>
           <S.SubmitButton type="submit" value="Entrar" />

@@ -1,10 +1,16 @@
-import { Cards, ErrorMessage, Loading, ResetFilterButton, SelectCategory, SortedButton } from "..";
+import {
+  Cards,
+  ErrorMessage,
+  Loading,
+  ResetFilterButton,
+  SelectCategory,
+  SortedButton,
+} from "..";
 import { useCards } from "../../hooks/useCards";
 import * as S from "./styles";
 
 export function Main() {
   const { games, isLoading, error } = useCards();
-  const gameList = games?.slice(0, 27);
 
   return (
     <S.Container>
@@ -13,12 +19,11 @@ export function Main() {
       {error ? <ErrorMessage error={error} /> : <></>}
       {!error && games ? (
         <S.FilterGroup>
-          <SelectCategory />
           <div>
-            <ResetFilterButton />
+            <SelectCategory />
             <SortedButton />
-            <button onClick={() => console.log(games)}>click</button>
           </div>
+          <ResetFilterButton />
         </S.FilterGroup>
       ) : (
         <></>

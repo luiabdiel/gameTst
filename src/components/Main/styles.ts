@@ -27,6 +27,25 @@ export const FilterGroup = styled.div`
   width: 100%;
 
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 380px){
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  >div {
+    display: flex;
+    gap: 8px;
+
+    @media screen and (max-width: 380px){
+      flex-direction: column;
+    }
+  }
+
+  &:last-child {
+    min-width: 180px;
+  }
 `

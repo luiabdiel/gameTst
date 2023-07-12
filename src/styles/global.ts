@@ -14,7 +14,10 @@ export const GlobalStyle = createGlobalStyle`
 
     margin: 0 auto;
 
-    background-color: rgba(0,0,0,0.50);
+    /* background-color: rgba(0,0,0,0.50); */
+    background-color: rgb(21 94 117 / 0.3);
+    background-clip: padding-box;
+    backdrop-filter: blur(16px);
   }
 
   body, input, textarea, button {
