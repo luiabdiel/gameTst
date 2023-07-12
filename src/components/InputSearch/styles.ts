@@ -18,6 +18,8 @@ export const Form = styled.form`
   width: 19.5rem;
 
   svg {
+    display: block;
+
     position: absolute;
     right: 20px;
     top: 50%;

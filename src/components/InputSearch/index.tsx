@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SearchIcon } from "..";
-import { useInputSearch } from "../../hooks";
+import { useFilter } from "../../hooks/useFilter";
+import { useCards } from "../../hooks/useCards";
 import * as S from "./styles";
 
 type Input = {
@@ -8,15 +9,12 @@ type Input = {
 };
 
 export function InputSearch() {
-  const { setInputFilter } = useInputSearch();
+  const { inputFilter } = useFilter();
+  const { dataGames } = useCards();
   const { register, handleSubmit } = useForm<Input>();
 
   const onSearch: SubmitHandler<Input> = ({ search }) => {
-    if (search.length > 0) {
-      setInputFilter(search);
-    } else {
-      setInputFilter("");
-    }
+    inputFilter(dataGames, search);
   };
 
   return (

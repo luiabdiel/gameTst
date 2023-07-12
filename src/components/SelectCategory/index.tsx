@@ -1,12 +1,15 @@
 import { useCards } from "../../hooks/useCards";
+import { useFilter } from "../../hooks/useFilter";
 import * as S from "./styles";
 
 export function SelectCategory() {
-  const { allCategories, category, setCategory } = useCards();
+  const { dataGames, allCategories, category, setCategory } = useCards();
+  const { categoryFilter } = useFilter();
 
   const uniqueCategories = [...new Set(allCategories)];
 
   function handleCategory(category: string) {
+    categoryFilter(dataGames, category);
     setCategory(category);
   }
 

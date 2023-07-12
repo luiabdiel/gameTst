@@ -23,3 +23,10 @@ export const ContentGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 50px 100px;
 `
+export const FilterGroup = styled.div`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`

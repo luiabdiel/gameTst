@@ -5,10 +5,19 @@ import { useNavigate } from "react-router-dom";
 import Rating from "react-rating";
 import { StarIconEmpty, StarIconFull } from "../Icons";
 import * as S from "./styles";
+import { useCards } from "../../hooks/useCards";
 
-export function Cards({ thumbnail, title, genre }: GameData) {
+type CardsProps = {
+  thumbnail: string;
+  title: string;
+  genre: string;
+  rate: number;
+};
+
+export function Cards({ thumbnail, title, genre, rate }: CardsProps) {
   const navigate = useNavigate();
-  const { favorites, addFavorite, removeFavorite } = useFavorite();
+  const { favorites, addFavorite, removeFavorite, addRating } = useFavorite();
+  const { games, setGames } = useCards();
 
   function newFavorite(newGame: GameData) {
     if (localStorage.getItem("appGameUser")) {
@@ -37,23 +46,47 @@ export function Cards({ thumbnail, title, genre }: GameData) {
   const isFavorite =
     favorites && favorites.some((game) => game.title === title);
 
+  function handleRating(rate: number) {
+    if (localStorage.getItem("appGameUser")) {
+      const user = localStorage.getItem("appGameUser");
+      const uid = user && JSON.parse(user).uid;
+
+      addRating(uid, { title, rate });
+
+      const newRating = games.map((game) => {
+        if (game.title === title) {
+          game.rate = rate;
+          return game;
+        } else {
+          return game;
+        }
+      });
+
+      setGames(newRating);
+    } else {
+      alert("Você precisa estar logado para classificar um jogo");
+      navigate("/auth");
+    }
+  }
+
   return (
     <S.Container>
       <div>
-          {/* @ts-ignore */}
-          <Rating
-            initialRating={2}
-            emptySymbol={<StarIconEmpty />}
-            fullSymbol={<StarIconFull />}
-          />
-        </div>
+        {/* @ts-ignore */}
+        <Rating
+          onChange={(e) => handleRating(e)}
+          initialRating={rate}
+          emptySymbol={<StarIconEmpty />}
+          fullSymbol={<StarIconFull />}
+        />
+      </div>
       <S.Content>
         <img src={thumbnail} alt={title} />
         {isFavorite ? (
           <FavoriteIcon onClick={() => favoriteRemove(title)} />
         ) : (
           <UnfavoriteIcon
-            onClick={() => newFavorite({ thumbnail, title, genre })}
+            onClick={() => newFavorite({ thumbnail, title, genre, rate })}
           />
         )}
 

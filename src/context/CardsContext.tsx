@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { useGameData, useInputSearch } from "../hooks";
+import { useFavorite, useGameData } from "../hooks";
 import { GameData } from "../interface/GameData";
 import { AxiosError } from "axios";
 
@@ -10,6 +10,12 @@ type CardsDataContextType = {
   error: AxiosError<unknown, any>;
   category: string;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
+  games: GameData[];
+  setGames: React.Dispatch<React.SetStateAction<GameData[]>>;
+  setDataGames: React.Dispatch<React.SetStateAction<GameData[]>>;
+  initialDataGames: GameData[];
+  sortMode: string;
+  setSortMode: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const emptyGameData = [
@@ -21,7 +27,6 @@ const emptyGameData = [
   },
 ];
 
-let dataGames: GameData[];
 let allCategories: string[];
 
 const CardsDataContext = createContext<CardsDataContextType>(
@@ -30,68 +35,69 @@ const CardsDataContext = createContext<CardsDataContextType>(
 
 const CardsDataProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, error, isLoading } = useGameData();
-  const [filteredGamesByCategories, setFilteredGamesByCategories] =
-    useState<GameData[]>(emptyGameData);
+  const [dataGames, setDataGames] = useState<GameData[]>(emptyGameData);
+  const [games, setGames] = useState<GameData[]>(emptyGameData);
   const [category, setCategory] = useState("");
-  const [onCategoryFilter, setOnCategoryFilter] = useState(false);
-  const [onInputFilter, setOnInputFilter] = useState(false);
-  const [filteredGamesByInputSearch, setFilteredGamesByInputSearch] = useState<
-  GameData[]
->(emptyGameData);
+  const [initialDataGames, setInitalDataGames] = useState<GameData[]>(null!);
+  const [sortMode, setSortMode] = useState("");
 
-  const { inputFilter } = useInputSearch();
+  const { ratings } = useFavorite();
 
   if (data) {
-
     allCategories = data.map((game) => {
       return game.genre;
     });
-
-    if(!onInputFilter && !onCategoryFilter) {
-      dataGames = data;
-    }
-
-    if(onCategoryFilter) {
-      dataGames = filteredGamesByCategories;
-    }
-
-    if(onInputFilter) {
-      dataGames = filteredGamesByInputSearch;
-    }
   }
 
   useEffect(() => {
-    if (category.length > 0) {
-      setOnCategoryFilter(true);
+    if (data) {
+      const newData = insertRating(data);
 
-      if (data) {
-        const filtereds = data.filter(
-          (game) => game.genre === category
-        );
-
-        setFilteredGamesByCategories(filtereds);
-      }
-    } else {
-      setOnCategoryFilter(false);
+      setDataGames(newData);
+      setInitalDataGames(newData);
+      setGames(newData);
     }
 
-    if (inputFilter.length > 0) {
-      setOnInputFilter(true);
+    function insertRating(data: GameData[]) {
+      const gameDataWithRate = data.map((gameWithoutRate) => {
+        const gameRating =
+          ratings &&
+          ratings.filter((game) => game.title === gameWithoutRate.title);
+        if (gameRating.length > 0) {
+          const gameWithRate: GameData = {
+            ...gameWithoutRate,
+            rate: gameRating[0].rate,
+          };
+          return gameWithRate;
+        } else {
+          return {
+            ...gameWithoutRate,
+            rate: 0,
+          };
+        }
+      });
 
-      if (data) {
-        const filtereds = data.filter((game) =>
-          game.title.toLowerCase().includes(inputFilter.toLowerCase())
-        );
-
-        setFilteredGamesByInputSearch(filtereds);
-      }
-    } else {
-      setOnInputFilter(false);
+      return gameDataWithRate;
     }
-  }, [category, inputFilter, data]);
+  }, [data]);
 
   return (
-    <CardsDataContext.Provider value={{ dataGames, allCategories, category, isLoading, error, setCategory }}>
+    <CardsDataContext.Provider
+      value={{
+        dataGames,
+        allCategories,
+        category,
+        isLoading,
+        error,
+        setCategory,
+        games,
+        setGames,
+        setDataGames,
+        initialDataGames,
+        setSortMode,
+        sortMode
+      }}
+    >
       {children}
     </CardsDataContext.Provider>
   );

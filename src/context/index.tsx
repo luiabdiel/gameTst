@@ -7,9 +7,11 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <AuthProvider>
       <InputSearchProvider>
+      <FavoriteProvider>
         <CardsDataProvider>
-          <FavoriteProvider>{children}</FavoriteProvider>
+          {children}
         </CardsDataProvider>
+      </FavoriteProvider>
       </InputSearchProvider>
     </AuthProvider>
   );
