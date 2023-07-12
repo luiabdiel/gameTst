@@ -9,3 +9,5 @@ export * from "./FavoritesButton";
 export * from "./Icons/SearchIcon";
 export * from "./Icons/FavoriteIcon";
 export * from "./Icons/UnfavoriteIcon";
+export * from "./ResetFilterButton";
+export * from "./SortedButton";
