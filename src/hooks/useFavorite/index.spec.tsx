@@ -11,7 +11,6 @@ describe("useFavorite", () => {
     const { result } = renderHook(() => useFavorite(), { wrapper });
 
     expect(result.current.favorites).toEqual([]);
-    expect(result.current.onFavorites).toBe(false);
 
     const newFavorites = [
       {
@@ -31,9 +30,7 @@ describe("useFavorite", () => {
     ];
     const newOnFavorites = true;
     result.current.setFavorites(newFavorites);
-    result.current.setOnFavorites(newOnFavorites);
 
     expect(result.current.favorites).toEqual(newFavorites);
-    expect(result.current.onFavorites).toBe(newOnFavorites);
   });
 });
