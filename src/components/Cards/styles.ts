@@ -12,6 +12,11 @@ export const Container = styled.div`
   box-shadow: 20px 15px 45px -25px rgba(7,136,140,1);
   background-color: rgb(226 222 240 / 0.4);
   background-clip: padding-box;
+  transition: 0.4s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   .card-mask {
     position: absolute;

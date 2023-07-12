@@ -21,7 +21,7 @@ export const Container = styled.div`
     max-width: 420px;
     min-width: 250px;
     width: 90%;
-    height: 690px;
+    height: 565px;
 
     background-color: #1c1c1c;
     overflow: hidden;
@@ -162,7 +162,7 @@ export const BeforeElement = styled.div`
   max-width: 420px;
   min-width: 250px;
   width: 90%;
-  height: 680px;
+  height: 565px;
   background: linear-gradient(
     0deg,
     transparent,
@@ -184,7 +184,7 @@ export const AfterElement = styled.div`
   max-width: 420px;
   min-width: 250px;
   width: 90%;
-  height: 680px;
+  height: 565px;
   background: linear-gradient(
     0deg,
     transparent,
@@ -212,7 +212,7 @@ export const BorderLine = styled.span`
     max-width: 420px;
     min-width: 250px;
     width: 90%;
-    height: 680px;
+    height: 565px;
     background: linear-gradient(
       0deg,
       transparent,
@@ -235,7 +235,7 @@ export const BorderLine = styled.span`
     max-width: 420px;
     min-width: 250px;
     width: 90%;
-    height: 680px;
+    height: 565px;
     background: linear-gradient(
       0deg,
       transparent,

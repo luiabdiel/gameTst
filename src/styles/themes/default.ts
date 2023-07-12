@@ -6,4 +6,5 @@ export const defaultTheme = {
   'blue-300': '#2455db',
   'border-card': 'rgba(36, 85, 219, 0.20)',
   'input-placeholder': 'rgba(0, 0, 0, 0.30)',
+  'bg-icon': 'rgba(243,244,246, 0.50)',
 } as const

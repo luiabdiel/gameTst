@@ -7,7 +7,6 @@ import * as S from "./styles";
 
 interface RegisterFormInput {
   name: string;
-  birthday: Date;
   email: string;
   password: string;
 }
@@ -27,7 +26,6 @@ export function Register({setIsSignUp}: RegisterProps) {
   } = useForm<RegisterFormInput>();
 
   const onSubmit: SubmitHandler<RegisterFormInput> = async (data) => {
-    data.birthday.setDate(data.birthday.getDate() + 1);
 
     const user = await handleSignUp(data);
 
@@ -35,10 +33,8 @@ export function Register({setIsSignUp}: RegisterProps) {
       const newUserData: AppUser = {
         uid: user.uid,
         name: data.name,
-        birthDate: data.birthday,
         email: data.email,
         favorites: [],
-        gifts_list: [],
         ratings: [],
       }
 
@@ -69,20 +65,6 @@ export function Register({setIsSignUp}: RegisterProps) {
           {errors.name?.type === "required" && (
             <span className="error-text">
               É necessário preencher seu nome
-            </span>
-          )}
-          <div className="input-box">
-            <input
-              {...register("birthday", { required: true, valueAsDate: true })}
-              type="date"
-              placeholder=" "
-            />
-            <span>Data de nascimento</span>
-            <i></i>
-          </div>
-          {errors.birthday?.type === "required" && (
-            <span className="error-text">
-              É necessário preencher sua data de nascimento
             </span>
           )}
           <div className="input-box">

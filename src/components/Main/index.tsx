@@ -14,8 +14,6 @@ export function Main() {
 
   return (
     <S.Container>
-      {isLoading && <Loading />}
-
       {error ? <ErrorMessage error={error} /> : <></>}
       {!error && games ? (
         <S.FilterGroup>
@@ -28,6 +26,7 @@ export function Main() {
       ) : (
         <></>
       )}
+      {isLoading && <Loading />}
       <S.ContentGrid>
         {!error &&
           games &&

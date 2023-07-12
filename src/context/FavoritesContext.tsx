@@ -7,7 +7,6 @@ import {
   updateRatings,
 } from "../services/db";
 import { Rating } from "../@types/rating";
-import { useCards } from "../hooks/useCards";
 
 type FavoriteContextProps = {
   favorites: GameData[];

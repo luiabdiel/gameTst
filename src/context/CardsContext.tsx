@@ -18,15 +18,6 @@ type CardsDataContextType = {
   setSortMode: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const emptyGameData = [
-  {
-    id: 0,
-    genre: "",
-    thumbnail: "",
-    title: "",
-  },
-];
-
 let allCategories: string[];
 
 const CardsDataContext = createContext<CardsDataContextType>(
@@ -35,8 +26,8 @@ const CardsDataContext = createContext<CardsDataContextType>(
 
 const CardsDataProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, error, isLoading } = useGameData();
-  const [dataGames, setDataGames] = useState<GameData[]>(emptyGameData);
-  const [games, setGames] = useState<GameData[]>(emptyGameData);
+  const [dataGames, setDataGames] = useState<GameData[]>([]);
+  const [games, setGames] = useState<GameData[]>([]);
   const [category, setCategory] = useState("");
   const [initialDataGames, setInitalDataGames] = useState<GameData[]>(null!);
   const [sortMode, setSortMode] = useState("");
