@@ -25,7 +25,6 @@ export function Main() {
   useEffect(() => {
     // Fetch items from another resources.
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setGames(dataGames.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(dataGames.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, setGames, dataGames]);
@@ -33,9 +32,7 @@ export function Main() {
   // Invoke when user click to request another page.
   const handlePageClick = (event: OnPageChangeProps) => {
     const newOffset = (event.selected * itemsPerPage) % dataGames.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+
     setItemOffset(newOffset);
   };
 

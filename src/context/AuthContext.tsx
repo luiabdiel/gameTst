@@ -1,6 +1,6 @@
 import { User, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { SetStateAction, createContext, useState } from "react";
-import { SignIn, SignUp, Forgot } from "../@types";
+import { SignIn, SignUp } from "../@types";
 import { auth } from '../services/firebaseConfig';
 
 interface AuthContextData {
@@ -9,7 +9,6 @@ interface AuthContextData {
   setSignData: React.Dispatch<SetStateAction<SignIn>>;
   handleSignIn: (data: SignIn) => Promise<string | User>;
   handleSignUp: (data: SignUp) => Promise<User>;
-  handleForgot: (data: Forgot) => void;
   handleSignOut: () => void;
 }
 
@@ -49,13 +48,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
-  function handleForgot(data: Forgot) {
-    console.log(data)
-  }
-
   return (
     <AuthContext.Provider
-      value={{ signData, successSignUp, setSignData, handleSignIn, handleSignOut, handleSignUp, handleForgot }}
+      value={{ signData, successSignUp, setSignData, handleSignIn, handleSignOut, handleSignUp }}
     >
       {children}
     </AuthContext.Provider>

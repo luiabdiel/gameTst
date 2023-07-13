@@ -12,8 +12,6 @@ export async function getAllUsers() {
   if (snapshot.exists()) {
     users = snapshot.val();
 
-    console.log(users);
-
     return users;
   } else {
     alert("No data available");
@@ -27,8 +25,6 @@ export async function getUser(uid: string) {
 
   if (snapshot.exists()) {
     user = snapshot.val();
-
-    console.log(user);
 
     return user;
   } else {
@@ -125,8 +121,6 @@ export async function getRatings(uid: string): Promise<Rating[]> {
 }
 
 export async function updateRatings(uid: string, ratings: Rating[]) {
-  console.log("entrou no updateRatings DB")
-  console.log("ratings", ratings)
   const updates: any = {};
 
   updates[`users/${uid}/ratings`] = ratings;

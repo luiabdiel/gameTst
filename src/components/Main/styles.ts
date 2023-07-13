@@ -20,6 +20,7 @@ export const Container = styled.section`
     text-align: center;
 
     background-color: ${({ theme }) => theme.white};
+    border-radius: 4px;
 
     min-width: 30px;
     border: solid 1px #b3b3b3;

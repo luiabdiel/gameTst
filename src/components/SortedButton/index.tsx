@@ -7,7 +7,6 @@ export function SortedButton() {
   const { sorted } = useFilter();
 
   function handleSorted(e: React.ChangeEvent<HTMLSelectElement>) {
-    console.log(dataGames)
     sorted(dataGames, e.target.value);
     setSortMode(e.target.value);
   }

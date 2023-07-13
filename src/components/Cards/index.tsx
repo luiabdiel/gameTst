@@ -4,8 +4,8 @@ import { GameData } from "../../interface/GameData";
 import { useNavigate } from "react-router-dom";
 import Rating from "react-rating";
 import { StarIconEmpty, StarIconFull } from "../Icons";
-import * as S from "./styles";
 import { useCards } from "../../hooks/useCards";
+import * as S from "./styles";
 
 type CardsProps = {
   thumbnail: string;
