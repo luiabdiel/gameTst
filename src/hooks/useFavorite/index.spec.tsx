@@ -28,7 +28,7 @@ describe("useFavorite", () => {
         genre: "Genre 2",
       },
     ];
-    const newOnFavorites = true;
+
     result.current.setFavorites(newFavorites);
 
     expect(result.current.favorites).toEqual(newFavorites);

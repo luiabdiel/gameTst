@@ -21,6 +21,7 @@ describe("Cards component", () => {
     const { getByRole } = render(
       <BrowserRouter>
         <Cards
+          rate={mockGameData.rate}
           thumbnail={mockGameData.thumbnail}
           title={mockGameData.title}
           genre={mockGameData.genre}
@@ -35,6 +36,7 @@ describe("Cards component", () => {
     const { getByText } = render(
       <BrowserRouter>
         <Cards
+          rate={mockGameData.rate}
           thumbnail={mockGameData.thumbnail}
           title={mockGameData.title}
           genre={mockGameData.genre}
@@ -49,6 +51,7 @@ describe("Cards component", () => {
     const { getByText } = render(
       <BrowserRouter>
         <Cards
+          rate={mockGameData.rate}
           thumbnail={mockGameData.thumbnail}
           title={mockGameData.title}
           genre={mockGameData.genre}

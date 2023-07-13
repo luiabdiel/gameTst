@@ -1,17 +1,10 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import { SelectCategory, SelectCategoryProps } from ".";
-import { mockGameData, mockStateSetter, mockString } from "../../mock";
+import { SelectCategory } from ".";
 
 describe("SelectCategory", () => {
   it("Should render options message", () => {
-    const props: SelectCategoryProps = {
-      setFilteredByCategory: mockStateSetter,
-      filteredByCategory: mockString,
-      gameData: [mockGameData],
-    };
-
-    const { getByText } = render(<SelectCategory {...props} />);
+    const { getByText } = render(<SelectCategory />);
 
     expect(getByText("Selecione a categoria")).toBeInTheDocument();
   });
