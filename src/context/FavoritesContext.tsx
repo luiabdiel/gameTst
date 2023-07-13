@@ -46,15 +46,12 @@ const FavoriteProvider = ({ children }: { children: React.ReactNode }) => {
         ratingsList &&
         ratingsList.filter((game) => game.title === gameWithoutRate.title);
       if (gameRating.length > 0) {
-        console.log("entrou no if")
         const gameWithRate: GameData = {
           ...gameWithoutRate,
           rate: gameRating[0].rate,
         };
         return gameWithRate;
       } else {
-        console.log(ratings)
-        console.log("entrou no else")
         return {
           ...gameWithoutRate,
           rate: 0,

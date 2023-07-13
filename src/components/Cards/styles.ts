@@ -14,12 +14,15 @@ export const Container = styled.div`
   background-clip: padding-box;
   transition: 0.4s;
 
+  overflow: hidden;
   &:hover {
     transform: scale(1.05);
   }
 
   .card-mask {
     position: absolute;
+
+    overflow: hidden;
 
     height: 100%;
     width: 100%;
