@@ -24,7 +24,7 @@ export function SelectCategory() {
       value={category}
     >
       <option value="">Selecione a categoria</option>
-      {uniqueCategories.map((category, index) => (
+      {uniqueCategories.sort().map((category, index) => (
         <option key={index} value={category}>
           {category}
         </option>
