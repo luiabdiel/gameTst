@@ -5,6 +5,7 @@ import * as S from "./styles";
 export function Header() {
   return (
     <S.Header>
+      <div className="mask"></div>
       <S.Content>
         <h1>App Masters Games</h1>
         <StarIconEmpty />

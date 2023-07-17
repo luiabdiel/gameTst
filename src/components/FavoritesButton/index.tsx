@@ -4,12 +4,13 @@ import { useFilter } from "../../hooks/useFilter";
 import * as S from "./styles";
 
 export function FavoritesButton() {
-  const { favorites } = useFavorite();
-  const {favoriteFilter} = useFilter();
-  const { setDataGames} = useCards();
+  const { favorites, setOnFavorite } = useFavorite();
+  const { favoriteFilter } = useFilter();
+  const { setDataGames } = useCards();
 
   function handleFavorite() {
-    favoriteFilter(favorites);
+    setOnFavorite(true);
+    favoriteFilter();
     setDataGames(favorites);
   }
 

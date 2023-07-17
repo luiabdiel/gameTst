@@ -1,15 +1,17 @@
+import { useFavorite } from "../../hooks";
 import { useCards } from "../../hooks/useCards";
 import { useFilter } from "../../hooks/useFilter";
 import * as S from "./styles";
 
 export function SelectCategory() {
-  const { dataGames, allCategories, category, setCategory } = useCards();
+  const { allCategories, category, setCategory, initialDataGames } = useCards();
   const { categoryFilter } = useFilter();
+  const {onFavorite, favorites} = useFavorite();
 
   const uniqueCategories = [...new Set(allCategories)];
 
   function handleCategory(category: string) {
-    categoryFilter(dataGames, category);
+    categoryFilter(onFavorite ? favorites : initialDataGames, category);
     setCategory(category);
   }
 

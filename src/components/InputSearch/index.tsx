@@ -3,6 +3,7 @@ import { SearchIcon } from "..";
 import { useFilter } from "../../hooks/useFilter";
 import { useCards } from "../../hooks/useCards";
 import * as S from "./styles";
+import { useFavorite } from "../../hooks";
 
 type Input = {
   search: string;
@@ -10,11 +11,12 @@ type Input = {
 
 export function InputSearch() {
   const { inputFilter } = useFilter();
-  const { dataGames } = useCards();
+  const { initialDataGames } = useCards();
+  const {onFavorite, favorites} = useFavorite();
   const { register, handleSubmit } = useForm<Input>();
 
   const onSearch: SubmitHandler<Input> = ({ search }) => {
-    inputFilter(dataGames, search);
+    inputFilter(onFavorite? favorites : initialDataGames, search);
   };
 
   return (

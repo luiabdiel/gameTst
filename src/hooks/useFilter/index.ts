@@ -1,16 +1,20 @@
 import { useCards } from "../useCards";
+import { UsePage } from "../usePage";
 import { GameData } from "./../../interface/GameData";
 
 export const useFilter = () => {
-  const { setGames } = useCards();
+  const { setGames, setDataGames } = useCards();
+  const {resetPage} = UsePage()
 
   const categoryFilter = (gameData: GameData[], category: string) => {
     if (category) {
       const filtereds = gameData.filter((game) => game.genre === category);
 
-      setGames(filtereds);
+      setDataGames(filtereds)
+      resetPage()
     } else {
-      setGames(gameData);
+      setDataGames(gameData)
+      resetPage()
     }
   };
   const inputFilter = (gameData: GameData[], input: string) => {
@@ -19,13 +23,16 @@ export const useFilter = () => {
         game.title.toLowerCase().includes(input.toLowerCase())
       );
 
-      setGames(filtereds);
+      setDataGames(filtereds);
+      resetPage()
     } else {
-      setGames(gameData);
+      setDataGames(gameData)
+      resetPage()
     }
   };
-  const favoriteFilter = (favorites: GameData[]) => {
-    setGames(favorites);
+
+  const favoriteFilter = () => {
+    resetPage()
   };
 
   const sorted = (gameData: GameData[], sortMode: string) => {
@@ -45,14 +52,18 @@ export const useFilter = () => {
       const lessRated = moreRated.slice().reverse()
 
       if(sortMode === "rate") {
-        setGames(moreRated)
+        setGames(moreRated.slice(0,9))
+        resetPage()
       } else if(sortMode === "title") {
-        setGames(lessRated)
+        setGames(lessRated.slice(0,9))
+        resetPage()
       } else {
-        setGames(gameData)
+        setGames(gameData.slice(0,9))
+        resetPage()
       }
     } else {
-      setGames(gameData);
+      setGames(gameData.slice(0,9));
+      resetPage()
     }
   }
   return { categoryFilter, inputFilter, favoriteFilter, sorted };

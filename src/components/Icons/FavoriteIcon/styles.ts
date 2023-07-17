@@ -9,6 +9,12 @@ const fillAnimation = keyframes`
   }
 `;
 
+const pulse = keyframes`
+  from {
+    box-shadow: 0 0 25px #ff5592, 0 0 50px #da2a2a;
+  }
+`;
+
 export const Svg = styled.svg`
   background-color: ${({ theme }) => theme['bg-icon']};
 
@@ -23,5 +29,9 @@ export const Svg = styled.svg`
     transition: fill 0.3s;
     fill: transparent;
     animation: ${fillAnimation} 0.5s ease-in-out forwards;
+  }
+
+  &:hover {
+    animation: ${pulse} 0.5s ease-in-out;
   }
 `

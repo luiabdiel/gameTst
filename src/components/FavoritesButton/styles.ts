@@ -1,4 +1,10 @@
-import { styled } from 'styled-components';
+import styled,{ keyframes } from "styled-components";
+
+const pulse = keyframes`
+  from {
+    box-shadow: 0 0 25px #7effb2, 0 0 50px #2cd9ff;
+  }
+`;
 
 export const Button = styled.button`
   background-color: ${({ theme }) => theme.white};
@@ -11,6 +17,10 @@ export const Button = styled.button`
   position: relative;
 
   cursor: pointer;
+
+  &:focus {
+    animation: ${pulse} 0.5s ease-in-out;
+  }
 `
 
 export const Span = styled.span`

@@ -16,6 +16,8 @@ type CardsDataContextType = {
   initialDataGames: GameData[];
   sortMode: string;
   setSortMode: React.Dispatch<React.SetStateAction<string>>;
+  itemOffset: number;
+  setItemOffset: React.Dispatch<React.SetStateAction<number>>;
 };
 
 let allCategories: string[];
@@ -30,6 +32,7 @@ const CardsDataProvider = ({ children }: { children: React.ReactNode }) => {
   const [games, setGames] = useState<GameData[]>([]);
   const [category, setCategory] = useState("");
   const [initialDataGames, setInitalDataGames] = useState<GameData[]>(null!);
+  const [itemOffset, setItemOffset] = useState(0);
   const [sortMode, setSortMode] = useState("");
 
   const { ratings } = useFavorite();
@@ -86,7 +89,9 @@ const CardsDataProvider = ({ children }: { children: React.ReactNode }) => {
         setDataGames,
         initialDataGames,
         setSortMode,
-        sortMode
+        sortMode,
+        itemOffset,
+        setItemOffset
       }}
     >
       {children}

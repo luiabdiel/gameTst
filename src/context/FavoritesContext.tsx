@@ -17,6 +17,8 @@ type FavoriteContextProps = {
   ratings: Rating[];
   setRatings: React.Dispatch<React.SetStateAction<Rating[]>>;
   addRating: (uid: string, rating: Rating) => void;
+  onFavorite: boolean;
+  setOnFavorite: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const FavoriteContext = createContext<FavoriteContextProps>(
@@ -29,6 +31,7 @@ let ratingsList: Rating[];
 const FavoriteProvider = ({ children }: { children: React.ReactNode }) => {
   const [favorites, setFavorites] = useState<GameData[]>([]);
   const [ratings, setRatings] = useState<Rating[]>([]);
+  const [onFavorite, setOnFavorite] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem("appGameUser");
@@ -114,6 +117,8 @@ const FavoriteProvider = ({ children }: { children: React.ReactNode }) => {
         ratings,
         setRatings,
         addRating,
+        onFavorite,
+        setOnFavorite
       }}
     >
       {children}

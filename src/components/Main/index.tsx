@@ -8,29 +8,33 @@ import {
   SortedButton,
 } from "..";
 import { useCards } from "../../hooks/useCards";
-import * as S from "./styles";
 import ReactPaginate from "react-paginate";
+import * as S from "./styles";
 
-type OnPageChangeProps = {
+export type OnPageChangeProps = {
   selected: number
 }
 
 export function Main() {
-  const { games, isLoading, error, setGames, dataGames } = useCards();
+  const { games, isLoading, error, setGames, dataGames, itemOffset, setItemOffset } = useCards();
   const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
+  const [endOffset, setEndOffset] = useState(0);
 
   const itemsPerPage = 9;
 
   useEffect(() => {
-    // Fetch items from another resources.
-    const endOffset = itemOffset + itemsPerPage;
+    const buttonPageOne = document.querySelector(".page-item.number");
+    buttonPageOne?.classList.add("remove-manual")
+
+    setEndOffset(itemOffset + itemsPerPage);
     setGames(dataGames.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(dataGames.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, setGames, dataGames]);
+  }, [itemOffset, itemsPerPage, setGames, dataGames, endOffset]);
 
-  // Invoke when user click to request another page.
   const handlePageClick = (event: OnPageChangeProps) => {
+    const buttonPageOne = document.querySelector(".page-item.number.remove-manual");
+    buttonPageOne?.classList.remove("active")
+
     const newOffset = (event.selected * itemsPerPage) % dataGames.length;
 
     setItemOffset(newOffset);
@@ -71,7 +75,7 @@ export function Main() {
         marginPagesDisplayed={2}
         pageCount={pageCount}
         previousLabel="<"
-        pageClassName="page-item"
+        pageClassName="page-item number"
         pageLinkClassName="page-link"
         previousClassName="page-item"
         previousLinkClassName="page-link"
@@ -83,6 +87,7 @@ export function Main() {
         containerClassName="pagination"
         activeClassName="active"
         renderOnZeroPageCount={null}
+        forcePage={itemOffset === 0 ? itemOffset : -0}
       />
     </S.Container>
   );

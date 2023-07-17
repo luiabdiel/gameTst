@@ -1,3 +1,9 @@
+import * as S from "./styled"
+
 export function Loading() {
-  return <p>Carregando...</p>;
+  return (
+    <S.Container>
+      <S.LoadingSpinner></S.LoadingSpinner>
+    </S.Container>
+  )
 }
