@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useFavorite } from "../../hooks";
 import { useCards } from "../../hooks/useCards";
 import { useFilter } from "../../hooks/useFilter";
@@ -7,11 +8,17 @@ export function FavoritesButton() {
   const { favorites, setOnFavorite } = useFavorite();
   const { favoriteFilter } = useFilter();
   const { setDataGames } = useCards();
+  const navigate = useNavigate();
 
   function handleFavorite() {
-    setOnFavorite(true);
-    favoriteFilter();
-    setDataGames(favorites);
+    if(localStorage.getItem("appGamerUser")) {
+      setOnFavorite(true);
+      favoriteFilter();
+      setDataGames(favorites);
+    } else {
+      alert("Você precisa estar logado para visualizar os seus favoritos")
+      navigate("/auth")
+    }
   }
 
   return (
