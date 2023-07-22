@@ -27,8 +27,8 @@ export function Login({ setIsSignUp }: LoginProps) {
     const user = await handleSignIn(data);
 
     if (typeof user !== "string") {
-      getFavoritesList(user.uid);
       getRatingsList(user.uid);
+      getFavoritesList(user.uid);
       navigate("/");
     }
   };

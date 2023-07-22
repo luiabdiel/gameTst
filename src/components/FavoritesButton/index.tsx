@@ -5,14 +5,14 @@ import { useFilter } from "../../hooks/useFilter";
 import * as S from "./styles";
 
 export function FavoritesButton() {
-  const { favorites, setOnFavorite } = useFavorite();
+  const { favorites, setOnFavorite, onFavorite } = useFavorite();
   const { favoriteFilter } = useFilter();
   const { setDataGames } = useCards();
   const navigate = useNavigate();
 
   function handleFavorite() {
     if(localStorage.getItem("appGameUser")) {
-      setOnFavorite(true);
+      setOnFavorite(!onFavorite);
       favoriteFilter();
       setDataGames(favorites);
     } else {
