@@ -73,7 +73,7 @@ const CardsDataProvider = ({ children }: { children: React.ReactNode }) => {
 
       return gameDataWithRate;
     }
-  }, [data]);
+  }, [data, ratings]);
 
   return (
     <CardsDataContext.Provider

@@ -11,7 +11,7 @@ export function FavoritesButton() {
   const navigate = useNavigate();
 
   function handleFavorite() {
-    if(localStorage.getItem("appGamerUser")) {
+    if(localStorage.getItem("appGameUser")) {
       setOnFavorite(true);
       favoriteFilter();
       setDataGames(favorites);

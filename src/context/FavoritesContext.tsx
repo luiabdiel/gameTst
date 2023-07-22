@@ -19,6 +19,7 @@ type FavoriteContextProps = {
   addRating: (uid: string, rating: Rating) => void;
   onFavorite: boolean;
   setOnFavorite: React.Dispatch<React.SetStateAction<boolean>>;
+  getRatingsList: (uid: string) => Promise<void>
 };
 
 const FavoriteContext = createContext<FavoriteContextProps>(
@@ -26,7 +27,7 @@ const FavoriteContext = createContext<FavoriteContextProps>(
 );
 
 let favoritesList: GameData[];
-let ratingsList: Rating[];
+let ratingsList: Rating[] = [];
 
 const FavoriteProvider = ({ children }: { children: React.ReactNode }) => {
   const [favorites, setFavorites] = useState<GameData[]>([]);
@@ -72,8 +73,12 @@ const FavoriteProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   async function getRatingsList(uid: string) {
-    ratingsList = await getRatings(uid);
-    ratingsList[0].title && setRatings(ratingsList);
+    const getRatingsList = await getRatings(uid);
+
+    if (getRatingsList) {
+      ratingsList = getRatingsList
+      setRatings(ratingsList)
+    }
   }
 
   async function addRating(uid: string, rating: Rating) {
@@ -118,7 +123,8 @@ const FavoriteProvider = ({ children }: { children: React.ReactNode }) => {
         setRatings,
         addRating,
         onFavorite,
-        setOnFavorite
+        setOnFavorite,
+        getRatingsList
       }}
     >
       {children}

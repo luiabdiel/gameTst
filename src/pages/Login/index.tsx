@@ -14,7 +14,7 @@ type LoginProps = {
 
 export function Login({ setIsSignUp }: LoginProps) {
   const { handleSignIn } = UseAuth();
-  const { getFavoritesList } = useFavorite();
+  const { getFavoritesList, getRatingsList } = useFavorite();
   const navigate = useNavigate();
 
   const {
@@ -28,6 +28,7 @@ export function Login({ setIsSignUp }: LoginProps) {
 
     if (typeof user !== "string") {
       getFavoritesList(user.uid);
+      getRatingsList(user.uid);
       navigate("/");
     }
   };
