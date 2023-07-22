@@ -4,8 +4,9 @@ import { Loading } from ".";
 
 describe("Loading component", () => {
   it("should render the loading component", () => {
-    const { getByText } = render(<Loading />);
+    const {getByTestId} = render(<Loading />)
 
-    expect(getByText("Carregando...")).toBeInTheDocument();
+    const loadingSpinnerElement = getByTestId('loading-spinner');
+     expect(loadingSpinnerElement).toBeInTheDocument();
   });
 });
